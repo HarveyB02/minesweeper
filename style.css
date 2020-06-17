@@ -1,0 +1,18 @@
+#field {
+    display: inline-block; /* Prevents extra space */
+}
+
+.row {
+    font-size: 0px; /* Prevents gaps between rows */
+}
+
+.col { /* Styling for clicked tiles */
+    display: inline-block; /* Keeps rows as a row, instead of leaking into next column */
+    width: 50px;
+    height: 50px;
+    vertical-align: top; /* Prevents weird spacing */
+} 
+
+.col.hidden { /* Styling for unclicked tiles */
+    background-color: #999999; /* Colour of tiles */
+}
