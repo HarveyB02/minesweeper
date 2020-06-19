@@ -13,6 +13,10 @@
     vertical-align: top; /* Prevents weird spacing */
 } 
 
+.col.mine {
+    background-color: #ff6961;
+}
+
 .col.hidden { /* Styling for unclicked tiles */
     background-color: #999999; /* Colour of tiles */
 }
