@@ -37,3 +37,8 @@ const addMines = (mineCount, cellCount) => {
 }
 
 generateField(width, height); // Start the game
+
+$field.on('click', '.col.hidden', function() { // When a hidden tile is clicked
+    const $cell = $(this);
+    $cell.removeClass('hidden');
+})
