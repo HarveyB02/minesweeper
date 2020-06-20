@@ -36,9 +36,28 @@ const addMines = (mineCount, cellCount) => {
     }
 }
 
+const endGame = (win) => { // When the game ends
+    let message = null;
+    if (win) {
+        message = 'Field swept' // If they win, tell them they won
+    } else {
+        message = 'Exploded' // If they lose, tell them they lost
+    }
+    $('.col.mine').removeClass('hidden');
+    setTimeout(function() {
+        alert(message);
+        generateField(width, height); // Restart the game
+    })
+}
+
 generateField(width, height); // Start the game
 
 $field.on('click', '.col.hidden', function() { // When a hidden tile is clicked
     const $cell = $(this);
     $cell.removeClass('hidden');
+    if ($cell.hasClass('mine')) {
+        endGame(false); // If it's a mine, lose the game
+    } else {
+        if ($('.col.hidden').length === $('.col.mine').length) endGame(true); // Check if won
+    }
 })
