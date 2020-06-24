@@ -1,8 +1,8 @@
 const $field = $('#field'); // Gets field div
 
-const width = 21
-const height = 9
-const mines = 20
+var width = 16
+var height = 9
+var mines = 20
 
 const generateField = (cols, rows) => { // Creates elements of the field
     $field.empty();

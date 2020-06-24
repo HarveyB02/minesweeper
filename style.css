@@ -1,5 +1,21 @@
+html, body {
+    font-family: 'Consolas', monospace;
+    color: #dbdbdb;
+    text-align: center;
+    background-color: #333333;
+    height: 100%;
+    white-space: nowrap;
+}
+
+
 #field {
+    background-color: #202020;
+    border-top: 6px solid #292929;
+    border-bottom: 6px solid #4d4d4d;
+    border-left: 6px solid #292929;
+    border-right: 6px solid #4d4d4d;
     display: inline-block; /* Prevents extra space */
+    margin: 50px;
 }
 
 .row {
@@ -13,13 +29,36 @@
     vertical-align: top; /* Prevents weird spacing */
     font-size: 20px;
     line-height: 50px;
-    color: black;
+    color: #dbdbdb;
 } 
 
 .col.mine {
+    width: 42px;
+    height: 42px;
     background-color: #ff6961;
+    border-top: 4px solid #ff827b;
+    border-bottom: 4px solid #d15852;
+    border-left: 4px solid #ff827b;
+    border-right: 4px solid #d15852;
 }
 
 .col.hidden { /* Styling for unclicked tiles */
-    background-color: #999999; /* Colour of tiles */
+    width: 42px;
+    height: 42px;
+    background-color: #3b3b3b; /* Colour of tiles */
+    border-top: 4px solid #5a5a5a;
+    border-bottom: 4px solid #292929;
+    border-left: 4px solid #525252;
+    border-right: 4px solid #292929;
+    cursor: pointer;
+}
+
+.col.hidden:hover { /* Styling for tiles being hovered over */
+    width: 42px;
+    height: 42px;
+    background-color: #353535;
+    border-top: 4px solid #292929;
+    border-bottom: 4px solid #5a5a5a;
+    border-left: 4px solid #292929;
+    border-right: 4px solid #5a5a5a;
 }
