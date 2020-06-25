@@ -97,6 +97,23 @@ const endGame = (win) => { // When the game ends
     })
 }
 
+const changeGridSize = () => {
+    let tempWidth = document.getElementById('widthInput').value;
+    if (isNaN(tempWidth) || tempWidth > 20 || tempWidth < 1) return;
+
+    let tempHeight = document.getElementById('heightInput').value;
+    if (isNaN(tempHeight) || tempHeight > 20 || tempHeight < 1) return;
+
+    let tempMines = document.getElementById('mineInput').value;
+    if (isNaN(tempMines) || tempMines < 1) return;
+
+    width = tempWidth
+    height = tempHeight
+    mines = tempMines
+
+    generateField(width, height)
+}
+
 generateField(width, height); // Start the game
 
 $field.on('click', '.col.hidden', function() { // When a hidden tile is clicked
