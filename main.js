@@ -4,7 +4,10 @@ var width = 16
 var height = 9
 var mines = 20
 
+var firstClick = true
+
 const generateField = (cols, rows) => { // Creates elements of the field
+    firstClick = true; // Used to see if first click is mine
     $field.empty();
     for (let y = 0; y < rows; y++) { 
         const $row = $('<div>').addClass('row'); // Create the specified amount of rows
@@ -99,19 +102,19 @@ const endGame = (win) => { // When the game ends
 
 const changeGridSize = () => {
     let tempWidth = document.getElementById('widthInput').value;
-    if (isNaN(tempWidth) || tempWidth > 20 || tempWidth < 1) return;
+    if (isNaN(tempWidth) || tempWidth > 20 || tempWidth < 1) return; // Verify a valid input for width
 
     let tempHeight = document.getElementById('heightInput').value;
-    if (isNaN(tempHeight) || tempHeight > 20 || tempHeight < 1) return;
+    if (isNaN(tempHeight) || tempHeight > 20 || tempHeight < 1) return; // Same with height
 
     let tempMines = document.getElementById('mineInput').value;
-    if (isNaN(tempMines) || tempMines < 1) return;
+    if (isNaN(tempMines) || tempMines < 1) return; // And with mines
 
-    width = tempWidth
-    height = tempHeight
-    mines = tempMines
+    width = tempWidth; // After verified replace the default values with input values
+    height = tempHeight;
+    mines = tempMines;
 
-    generateField(width, height)
+    generateField(width, height); // Generate again
 }
 
 generateField(width, height); // Start the game
@@ -121,9 +124,18 @@ $field.on('click', '.col.hidden', function() { // When a hidden tile is clicked
     const row = $cell.data('row');
     const col = $cell.data('col');
     if ($cell.hasClass('mine')) {
-        endGame(false); // If it's a mine, lose the game
+        if (firstClick) { // If they get a mine on the first click
+            while ($cell.hasClass('mine')) { // Just incase it comes back
+                $cell.removeClass('mine'); // Remove it
+                addMines(1); // Make a new one
+            }
+            reveal(col, row); // Reveal the cell
+        } else {
+            endGame(false); // If it's a mine, lose the game
+        }
     } else {
-        reveal(col, row) // Otherwise, reveal
+        reveal(col, row); // Otherwise, reveal
         if ($('.col.hidden').length === $('.col.mine').length) endGame(true); // Check if won
     }
+    firstClick = false; // No longer first click
 })
