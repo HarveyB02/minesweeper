@@ -106,3 +106,18 @@ html, body {
     border-left: 4px solid #292929;
     border-right: 4px solid #5a5a5a;
 }
+
+.col.hidden.flagged {
+    font-size: 25px;
+    line-height: 40px;
+    color: #dbdbdb;
+}
+
+.col.hidden.flagged:hover {
+    background-color: #3b3b3b; /* Colour of tiles */
+    border-top: 4px solid #5a5a5a;
+    border-bottom: 4px solid #292929;
+    border-left: 4px solid #525252;
+    border-right: 4px solid #292929;
+    cursor: default;
+}

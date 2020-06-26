@@ -16,6 +16,7 @@ const generateField = (cols, rows) => { // Creates elements of the field
             .addClass('col hidden')
             .attr('data-row', y) 
             .attr('data-col', x) 
+            .attr('onselectstart', 'return false') // Prevents highlighting flag
             $row.append($col); // Append col to row
         }
         $field.append($row); // Append row to field
@@ -121,6 +122,9 @@ generateField(width, height); // Start the game
 
 $field.on('click', '.col.hidden', function() { // When a hidden tile is clicked
     const $cell = $(this);
+
+    if ($cell.hasClass('flagged')) return; // Make flagged cells unclickable
+
     const row = $cell.data('row');
     const col = $cell.data('col');
     if ($cell.hasClass('mine')) {
@@ -139,3 +143,19 @@ $field.on('click', '.col.hidden', function() { // When a hidden tile is clicked
     }
     firstClick = false; // No longer first click
 })
+
+$field.on('contextmenu', '.col.hidden', function(event) { // When a hidden tile is right clicked
+    if(event.preventDefault != undefined) // Prevents context menu from appearing
+    event.preventDefault();
+    if(event.stopPropagation != undefined)
+    event.stopPropagation();
+
+    const $cell = $(this);
+    if (!$cell.hasClass('flagged')) {
+        $cell.addClass('flagged')
+        $cell.html("x");
+    } else {
+        $cell.removeClass('flagged')
+        $cell.html("");
+    }
+});
