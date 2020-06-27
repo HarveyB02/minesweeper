@@ -1,12 +1,17 @@
 const $field = $('#field'); // Gets field div
 
-var width = 16
-var height = 9
-var mines = 20
+var width = 16;
+var height = 9;
+var mines = 20;
 
-var firstClick = true
+var firstClick = true;
+var seconds = 0;
+var stopwatch = null;
 
 const generateField = (cols, rows) => { // Creates elements of the field
+    clearInterval(stopwatch);
+    document.getElementById("time").textContent = `0s`;
+
     firstClick = true; // Used to see if first click is mine
     $field.empty();
     for (let y = 0; y < rows; y++) { 
@@ -88,6 +93,7 @@ const reveal = (origX, origY) => {
 }
 
 const endGame = (win) => { // When the game ends
+    clearInterval(stopwatch);
     let message = null;
     if (win) {
         message = 'Field swept' // If they win, tell them they won
@@ -118,9 +124,22 @@ const changeGridSize = () => {
     generateField(width, height); // Generate again
 }
 
+const timer = () => {
+    seconds = 0;
+
+    stopwatch = setInterval(function() {
+        seconds++;
+        document.getElementById("time").textContent = `${seconds}s`;
+    }, 1000);
+}
+
 generateField(width, height); // Start the game
 
 $field.on('click', '.col.hidden', function() { // When a hidden tile is clicked
+    if (firstClick) {
+        timer();
+    }
+
     const $cell = $(this);
 
     if ($cell.hasClass('flagged')) return; // Make flagged cells unclickable
@@ -134,6 +153,7 @@ $field.on('click', '.col.hidden', function() { // When a hidden tile is clicked
                 addMines(1); // Make a new one
             }
             reveal(col, row); // Reveal the cell
+            if ($('.col.hidden').length === $('.col.mine').length) endGame(true); // Check if won
         } else {
             endGame(false); // If it's a mine, lose the game
         }
@@ -151,10 +171,10 @@ $field.on('contextmenu', '.col.hidden', function(event) { // When a hidden tile 
     event.stopPropagation();
 
     const $cell = $(this);
-    if (!$cell.hasClass('flagged')) {
+    if (!$cell.hasClass('flagged')) { // If it isn't flagged already, flag it
         $cell.addClass('flagged')
         $cell.html("x");
-    } else {
+    } else { // Otherwise, remove the flag
         $cell.removeClass('flagged')
         $cell.html("");
     }

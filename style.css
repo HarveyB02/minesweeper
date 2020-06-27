@@ -17,7 +17,7 @@ html, body {
     display: inline-block; /* Prevents extra space */
 }
 
-.input {
+.input { /*input for custom size styling*/
     padding: 15px 20px;
     margin: 30px 5px;
     background-color: #525252;
@@ -34,7 +34,7 @@ html, body {
     color: #e4e4e4;
 }
 
-.confirmBtn {
+.confirmBtn { /* confirm custom size button */
     width: 42px;
     height: 42px;
     background-color: #3b3b3b; 
@@ -50,7 +50,7 @@ html, body {
     color: #999;
 }
 
-.confirmBtn:hover { 
+.confirmBtn:hover { /* Styling for button is being hovered over */
     width: 42px;
     height: 42px;
     background-color: #353535;
@@ -107,17 +107,23 @@ html, body {
     border-right: 4px solid #5a5a5a;
 }
 
-.col.hidden.flagged {
+.col.flagged {
     font-size: 25px;
     line-height: 40px;
     color: #dbdbdb;
 }
 
-.col.hidden.flagged:hover {
+.col.flagged:hover {
     background-color: #3b3b3b; /* Colour of tiles */
     border-top: 4px solid #5a5a5a;
     border-bottom: 4px solid #292929;
     border-left: 4px solid #525252;
     border-right: 4px solid #292929;
     cursor: default;
+}
+
+#time {
+    margin-top: 15px;
+    color: #666;
+    font-size: 20px;
 }
