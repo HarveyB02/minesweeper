@@ -102,13 +102,28 @@ const endGame = (win) => { // When the game ends
     if (win) {
         message = 'Field swept' // If they win, tell them they won
     } else {
-        message = 'Exploded' // If they lose, tell them they lost
+        message = 'Failed' // If they lose, tell them they lost
     }
+
     $('.col.mine').removeClass('hidden');
-    setTimeout(function() {
-        alert(message);
-        generateField(width, height); // Restart the game
-    })
+    
+    var modal = document.getElementById("myModal");
+    var span = document.getElementsByClassName("close")[0];
+    var $messageBox = $(document.getElementById("messageBox"));
+
+    $messageBox.text(message);
+    modal.style.display = 'block';
+
+    span.onclick = function() {
+        modal.style.display = "none";
+        generateField(width, height);
+    }
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+            generateField(width, height);
+        }
+    } 
 }
 
 const changeGridSize = () => {
