@@ -128,6 +128,12 @@ html, body {
     font-size: 20px;
 }
 
+#remaining {
+    margin-top: 15px;
+    color: #666;
+    font-size: 20px;
+}
+
 .col.count1 {
     color: #FFEA2E;
 }

@@ -7,10 +7,10 @@ var mines = 20;
 var firstClick = true;
 var seconds = 0;
 var stopwatch = null;
+var remaining = null;
 
 const generateField = (cols, rows) => { // Creates elements of the field
     clearInterval(stopwatch);
-    document.getElementById("time").textContent = `0s`;
 
     firstClick = true; // Used to see if first click is mine
     $field.empty();
@@ -28,6 +28,9 @@ const generateField = (cols, rows) => { // Creates elements of the field
     }
 
     addMines(mines, cols * rows) // Add mines to the field
+
+    remaining = $('.col.mine').length - $('.col.flagged').length;
+    document.getElementById("time").textContent = `Mines Remaining: ${remaining} Time: 0s`;
 }
 
 const addMines = (mineCount, cellCount) => {
@@ -130,7 +133,7 @@ const timer = () => {
 
     stopwatch = setInterval(function() {
         seconds++;
-        document.getElementById("time").textContent = `${seconds}s`;
+        document.getElementById("time").textContent = `Mines Remaining: ${remaining} Time: ${seconds}s`;
     }, 1000);
 }
 
@@ -179,4 +182,7 @@ $field.on('contextmenu', '.col.hidden', function(event) { // When a hidden tile 
         $cell.removeClass('flagged')
         $cell.html("");
     }
+
+    remaining = $('.col.mine').length - $('.col.flagged').length;
+    document.getElementById("time").textContent = `Mines Remaining: ${remaining} Time: ${seconds}s`;
 });
