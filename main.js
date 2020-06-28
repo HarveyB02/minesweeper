@@ -79,6 +79,7 @@ const reveal = (origX, origY) => {
 
         if (mineCount) {
             $cell.text(mineCount);
+            $cell.addClass(`count${mineCount}`);
             return;
         }
 
