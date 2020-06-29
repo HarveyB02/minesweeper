@@ -7,6 +7,9 @@ html, body {
     white-space: nowrap;
 }
 
+h1 {
+    margin-bottom: 0px;
+}
 
 #field {
     background-color: #202020;
@@ -202,4 +205,8 @@ html, body {
     color: #000;
     text-decoration: none;
     cursor: pointer;
+  }
+
+  .blurb {
+      color: #eee;
   }
